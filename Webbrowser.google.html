@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A simple search page to find information on the web.">
+    <title>Discover The Web</title>
+    <style>
+        /* Critical CSS for immediate rendering */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, violet, lightpink, pink);
+            background-size: 300% 300%;
+            /* Increase size for animation */
+            animation: wave 10s ease infinite;
+            /* Apply wave animation */
+        }
+
+        @keyframes wave {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            /* Rounded corners for the search bar */
+            font-size: 1rem;
+            margin-right: 10px;
+            border: 2px solid #007BFF;
+            /* Initial border color */
+            transition: border-color 0.3s, background-color 0.3s;
+            /* Smooth transition for border color */
+        }
+
+        input[type="text"]:focus {
+            border-color: #007BFF;
+            /* Change border color on focus */
+            background-color: #e0f7fa;
+            /* Change background color on focus */
+            animation: pulse 0.5s infinite;
+            /* Add pulse animation */
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0px rgba(0, 123, 255, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 0px rgba(0, 123, 255, 0.5);
+            }
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff6f91;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff4b6e;
+        }
+
+        .answer-box {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+            display: none;
+            /* Initially hidden */
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Search Engine</h1>
+<div class="search-container">
+    <form id="searchForm">
+        <input type="text" name="q" id="searchInput" placeholder="Type your search query here..." required>
+        <button type="submit">Search</button>
+        <button type="button" id="clearButton">Clear</button>
+    </form>
+    <div class="answer-box" id="answerBox"></div>
+    <!-- Answer box to display results -->
+</div>
+
+<script>
+    // Clear Button Functionality
+    document.getElementById('clearButton').addEventListener('click', () => {
+        document.getElementById('searchInput').value = ''; // Clear the input field
+        document.getElementById('answerBox').style.display = 'none'; // Hide the answer box
+    });
+
+    // Handle Search Form Submission
+    document.getElementById('searchForm').addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent the default form submission
+
+        const query = document.getElementById('searchInput').value; // Get the search query
+
+        // Redirect to Google search
+        window.location.href = `https://www.google.com/search?q=${query}`;
+    });
+
+    // Dynamic Effects While Typing
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('input', () => {
+        if (searchInput.value) {
+            searchInput.style.borderColor = '#28a745'; // Change border color while typing
+        } else {
+            searchInput.style.borderColor = '#007BFF'; // Reset border color when empty
+        }
+    });
+</script>
+</body>
+
+</html>
